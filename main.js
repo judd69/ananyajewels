@@ -10,7 +10,7 @@
   let cursorRingPos = { x: 0, y: 0 };
   let isLoaded = false;
   let heroScene, heroCamera, heroRenderer, heroParticles, heroFrame;
-  let aboutScene, aboutCamera, aboutRenderer, aboutMesh, aboutFrame;
+  let cartCount = 0;
 
   function initNoise() {
     const canvas = $('#noise-canvas');
@@ -26,7 +26,7 @@
 
     function drawNoise() {
       frame++;
-      if (frame % 2 === 0) {
+      if (frame % 3 === 0) {
         const { width, height } = canvas;
         const imageData = ctx.createImageData(width, height);
         const data = imageData.data;
@@ -56,18 +56,27 @@
     });
 
     function animateCursor() {
-      cursorRingPos.x = lerp(cursorRingPos.x, mouse.rawX, 0.1);
-      cursorRingPos.y = lerp(cursorRingPos.y, mouse.rawY, 0.1);
+      cursorRingPos.x = lerp(cursorRingPos.x, mouse.rawX, 0.08);
+      cursorRingPos.y = lerp(cursorRingPos.y, mouse.rawY, 0.08);
       ring.style.left = cursorRingPos.x + 'px';
       ring.style.top = cursorRingPos.y + 'px';
       requestAnimationFrame(animateCursor);
     }
     animateCursor();
 
-    document.querySelectorAll('.magnetic, .nav-link, .filter-btn').forEach(el => {
-      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
-    });
+    function refreshHoverTargets() {
+      document.querySelectorAll('.magnetic, .nav-link, .filter-btn, .btn-add-cart, .featured-card, .work-card').forEach(el => {
+        el.removeEventListener('mouseenter', addHover);
+        el.removeEventListener('mouseleave', removeHover);
+        el.addEventListener('mouseenter', addHover);
+        el.addEventListener('mouseleave', removeHover);
+      });
+    }
+
+    function addHover() { document.body.classList.add('cursor-hover'); }
+    function removeHover() { document.body.classList.remove('cursor-hover'); }
+
+    refreshHoverTargets();
   }
 
   function initPreloader() {
@@ -75,16 +84,14 @@
       const preloader = $('#preloader');
       const bar = $('#preloader-bar');
       const num = $('#preloader-num');
-      let count = 0;
-      const target = 100;
-      const duration = 2200;
+      const duration = 2400;
       const start = performance.now();
 
       function update(now) {
         const elapsed = now - start;
         const progress = Math.min(elapsed / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        count = Math.floor(eased * target);
+        const eased = 1 - Math.pow(1 - progress, 4);
+        const count = Math.floor(eased * 100);
         bar.style.width = count + '%';
         num.textContent = count;
 
@@ -96,7 +103,7 @@
           setTimeout(() => {
             preloader.classList.add('hidden');
             resolve();
-          }, 400);
+          }, 500);
         }
       }
 
@@ -120,7 +127,7 @@
     heroCamera = new THREE.PerspectiveCamera(60, W / H, 0.1, 1000);
     heroCamera.position.set(0, 0, 80);
 
-    const count = 12000;
+    const count = 10000;
     const positions = new Float32Array(count * 3);
     const colors = new Float32Array(count * 3);
     const sizes = new Float32Array(count);
@@ -129,42 +136,46 @@
       const i3 = i * 3;
       const r = Math.random();
 
-      if (r < 0.35) {
+      if (r < 0.3) {
         const angle = Math.random() * Math.PI * 2;
-        const torusR = 30 + (Math.random() - 0.5) * 8;
-        const tubeR = (Math.random() - 0.5) * 5;
-        positions[i3]     = Math.cos(angle) * torusR + tubeR;
+        const torusR = 28 + (Math.random() - 0.5) * 10;
+        const tubeR = (Math.random() - 0.5) * 6;
+        positions[i3] = Math.cos(angle) * torusR + tubeR;
         positions[i3 + 1] = Math.sin(angle) * torusR + tubeR;
-        positions[i3 + 2] = (Math.random() - 0.5) * 10;
-      } else if (r < 0.55) {
+        positions[i3 + 2] = (Math.random() - 0.5) * 12;
+      } else if (r < 0.5) {
         const phi = Math.acos(2 * Math.random() - 1);
         const theta = Math.random() * Math.PI * 2;
-        const rad = 12 + Math.random() * 5;
-        positions[i3]     = rad * Math.sin(phi) * Math.cos(theta);
+        const rad = 14 + Math.random() * 6;
+        positions[i3] = rad * Math.sin(phi) * Math.cos(theta);
         positions[i3 + 1] = rad * Math.sin(phi) * Math.sin(theta);
         positions[i3 + 2] = rad * Math.cos(phi);
       } else {
-        positions[i3]     = (Math.random() - 0.5) * 200;
+        positions[i3] = (Math.random() - 0.5) * 200;
         positions[i3 + 1] = (Math.random() - 0.5) * 200;
-        positions[i3 + 2] = (Math.random() - 0.5) * 180;
+        positions[i3 + 2] = (Math.random() - 0.5) * 160;
       }
 
       const hue = Math.random();
-      if (hue < 0.5) {
-        colors[i3] = 0.0 + Math.random() * 0.1;
-        colors[i3 + 1] = 0.85 + Math.random() * 0.15;
-        colors[i3 + 2] = 0.95 + Math.random() * 0.05;
-      } else if (hue < 0.8) {
-        colors[i3] = 0.0;
-        colors[i3 + 1] = 0.7 + Math.random() * 0.3;
-        colors[i3 + 2] = 0.6 + Math.random() * 0.4;
+      if (hue < 0.4) {
+        colors[i3] = 0.83 + Math.random() * 0.1;
+        colors[i3 + 1] = 0.66 + Math.random() * 0.15;
+        colors[i3 + 2] = 0.32 + Math.random() * 0.1;
+      } else if (hue < 0.65) {
+        colors[i3] = 0.72 + Math.random() * 0.15;
+        colors[i3 + 1] = 0.43 + Math.random() * 0.15;
+        colors[i3 + 2] = 0.47 + Math.random() * 0.1;
+      } else if (hue < 0.85) {
+        colors[i3] = 0.95 + Math.random() * 0.05;
+        colors[i3 + 1] = 0.88 + Math.random() * 0.1;
+        colors[i3 + 2] = 0.75 + Math.random() * 0.15;
       } else {
-        colors[i3] = 0.3 + Math.random() * 0.3;
-        colors[i3 + 1] = 0.3 + Math.random() * 0.3;
-        colors[i3 + 2] = 0.5 + Math.random() * 0.5;
+        colors[i3] = 0.6 + Math.random() * 0.3;
+        colors[i3 + 1] = 0.5 + Math.random() * 0.3;
+        colors[i3 + 2] = 0.4 + Math.random() * 0.3;
       }
 
-      sizes[i] = Math.random() * 2.5 + 0.5;
+      sizes[i] = Math.random() * 2.5 + 0.3;
     }
 
     const geo = new THREE.BufferGeometry();
@@ -186,13 +197,13 @@
         void main() {
           vColor = color;
           vec3 pos = position;
-          pos.x += sin(pos.y * 0.04 + uTime * 0.3) * 1.5;
-          pos.y += cos(pos.x * 0.04 + uTime * 0.25) * 1.5;
-          pos.z += sin(pos.x * 0.03 + uTime * 0.2) * 1.0;
-          pos.x += uMouse.x * (pos.z * 0.02 + 1.0) * 4.0;
-          pos.y += uMouse.y * (pos.z * 0.02 + 1.0) * 4.0;
+          pos.x += sin(pos.y * 0.035 + uTime * 0.25) * 1.8;
+          pos.y += cos(pos.x * 0.035 + uTime * 0.2) * 1.8;
+          pos.z += sin(pos.x * 0.025 + uTime * 0.15) * 1.2;
+          pos.x += uMouse.x * (pos.z * 0.015 + 1.0) * 3.5;
+          pos.y += uMouse.y * (pos.z * 0.015 + 1.0) * 3.5;
           vec4 mvPos = modelViewMatrix * vec4(pos, 1.0);
-          gl_PointSize = size * (200.0 / -mvPos.z);
+          gl_PointSize = size * (180.0 / -mvPos.z);
           gl_Position = projectionMatrix * mvPos;
         }
       `,
@@ -202,8 +213,8 @@
           vec2 uv = gl_PointCoord - 0.5;
           float dist = length(uv);
           if (dist > 0.5) discard;
-          float alpha = 1.0 - smoothstep(0.2, 0.5, dist);
-          gl_FragColor = vec4(vColor, alpha * 0.85);
+          float alpha = 1.0 - smoothstep(0.15, 0.5, dist);
+          gl_FragColor = vec4(vColor, alpha * 0.8);
         }
       `,
       transparent: true,
@@ -226,7 +237,7 @@
           vNormal = normalize(normalMatrix * normal);
           vPos = position;
           vec3 pos = position;
-          pos += normal * sin(uTime * 1.5 + position.y * 0.5) * 0.8;
+          pos += normal * sin(uTime * 1.2 + position.y * 0.5) * 0.6;
           gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
         }
       `,
@@ -235,11 +246,11 @@
         varying vec3 vPos;
         uniform float uTime;
         void main() {
-          float fresnel = pow(1.0 - abs(dot(vNormal, vec3(0.0, 0.0, 1.0))), 2.0);
-          vec3 cyan = vec3(0.0, 0.96, 1.0);
-          vec3 teal = vec3(0.0, 0.83, 0.67);
-          vec3 col = mix(teal, cyan, sin(uTime * 0.5) * 0.5 + 0.5);
-          gl_FragColor = vec4(col * fresnel * 1.5, fresnel * 0.5);
+          float fresnel = pow(1.0 - abs(dot(vNormal, vec3(0.0, 0.0, 1.0))), 2.5);
+          vec3 gold = vec3(0.83, 0.66, 0.33);
+          vec3 rose = vec3(0.72, 0.44, 0.47);
+          vec3 col = mix(gold, rose, sin(uTime * 0.4) * 0.5 + 0.5);
+          gl_FragColor = vec4(col * fresnel * 1.2, fresnel * 0.4);
         }
       `,
       transparent: true,
@@ -266,22 +277,22 @@
     let clock = 0;
     function heroAnimate() {
       heroFrame = requestAnimationFrame(heroAnimate);
-      clock += 0.008;
+      clock += 0.006;
 
       mat.uniforms.uTime.value = clock;
       glowMat.uniforms.uTime.value = clock;
       mat.uniforms.uMouse.value.set(
-        lerp(mat.uniforms.uMouse.value.x, mouse.x, 0.04),
-        lerp(mat.uniforms.uMouse.value.y, mouse.y, 0.04)
+        lerp(mat.uniforms.uMouse.value.x, mouse.x, 0.035),
+        lerp(mat.uniforms.uMouse.value.y, mouse.y, 0.035)
       );
 
-      heroParticles.rotation.y = clock * 0.04;
-      heroParticles.rotation.x = clock * 0.02;
-      glowSphere.rotation.y = clock * 0.3;
-      glowSphere.rotation.x = clock * 0.2;
+      heroParticles.rotation.y = clock * 0.03;
+      heroParticles.rotation.x = clock * 0.015;
+      glowSphere.rotation.y = clock * 0.25;
+      glowSphere.rotation.x = clock * 0.15;
 
-      heroCamera.position.x = lerp(heroCamera.position.x, mouse.x * 8, 0.03);
-      heroCamera.position.y = lerp(heroCamera.position.y, mouse.y * 5, 0.03);
+      heroCamera.position.x = lerp(heroCamera.position.x, mouse.x * 6, 0.025);
+      heroCamera.position.y = lerp(heroCamera.position.y, mouse.y * 4, 0.025);
       heroCamera.lookAt(0, 0, 0);
 
       heroRenderer.render(heroScene, heroCamera);
@@ -308,56 +319,52 @@
       frame++;
       ctx.clearRect(0, 0, w, h);
 
-      const t = frame * 0.02;
-      const numStrands = 2;
-      const points = 80;
+      const t = frame * 0.015;
+      const numStrands = 3;
+      const points = 100;
 
       for (let s = 0; s < numStrands; s++) {
         const phaseOffset = (s / numStrands) * Math.PI;
         ctx.beginPath();
         for (let i = 0; i <= points; i++) {
           const px = (i / points) * w;
-          const wave = Math.sin((i / points) * Math.PI * 4 + t + phaseOffset);
-          const py = h / 2 + wave * (h * 0.25);
+          const wave = Math.sin((i / points) * Math.PI * 3.5 + t + phaseOffset);
+          const py = h / 2 + wave * (h * 0.22);
           if (i === 0) ctx.moveTo(px, py);
           else ctx.lineTo(px, py);
         }
         const grad = ctx.createLinearGradient(0, 0, w, 0);
-        grad.addColorStop(0, 'rgba(0,212,170,0.1)');
-        grad.addColorStop(0.5, 'rgba(0,245,255,0.7)');
-        grad.addColorStop(1, 'rgba(0,100,255,0.1)');
+        if (s === 0) {
+          grad.addColorStop(0, 'rgba(212,168,83,0.05)');
+          grad.addColorStop(0.5, 'rgba(212,168,83,0.5)');
+          grad.addColorStop(1, 'rgba(183,110,121,0.05)');
+        } else if (s === 1) {
+          grad.addColorStop(0, 'rgba(183,110,121,0.05)');
+          grad.addColorStop(0.5, 'rgba(183,110,121,0.4)');
+          grad.addColorStop(1, 'rgba(212,168,83,0.05)');
+        } else {
+          grad.addColorStop(0, 'rgba(232,201,122,0.03)');
+          grad.addColorStop(0.5, 'rgba(232,201,122,0.3)');
+          grad.addColorStop(1, 'rgba(232,201,122,0.03)');
+        }
         ctx.strokeStyle = grad;
-        ctx.lineWidth = 1.5;
+        ctx.lineWidth = 1.2;
         ctx.stroke();
 
-        for (let i = 0; i <= points; i += 4) {
+        for (let i = 0; i <= points; i += 5) {
           const px = (i / points) * w;
-          const wave = Math.sin((i / points) * Math.PI * 4 + t + phaseOffset);
-          const py = h / 2 + wave * (h * 0.25);
+          const wave = Math.sin((i / points) * Math.PI * 3.5 + t + phaseOffset);
+          const py = h / 2 + wave * (h * 0.22);
           ctx.beginPath();
-          ctx.arc(px, py, 2, 0, Math.PI * 2);
-          const alpha = (Math.sin(t + i * 0.3) * 0.5 + 0.5) * 0.8 + 0.2;
-          ctx.fillStyle = s === 0
-            ? `rgba(0,245,255,${alpha})`
-            : `rgba(0,212,170,${alpha})`;
+          ctx.arc(px, py, 1.5, 0, Math.PI * 2);
+          const alpha = (Math.sin(t + i * 0.3) * 0.5 + 0.5) * 0.7 + 0.1;
+          const colorsArr = [
+            `rgba(212,168,83,${alpha})`,
+            `rgba(183,110,121,${alpha})`,
+            `rgba(232,201,122,${alpha})`
+          ];
+          ctx.fillStyle = colorsArr[s];
           ctx.fill();
-        }
-
-        if (s === 1) {
-          for (let i = 0; i <= points; i += 8) {
-            const px = (i / points) * w;
-            const wave0 = Math.sin((i / points) * Math.PI * 4 + t);
-            const py0 = h / 2 + wave0 * (h * 0.25);
-            const wave1 = Math.sin((i / points) * Math.PI * 4 + t + Math.PI);
-            const py1 = h / 2 + wave1 * (h * 0.25);
-            const alpha = 0.07 + Math.abs(Math.sin(t + i)) * 0.08;
-            ctx.beginPath();
-            ctx.moveTo(px, py0);
-            ctx.lineTo(px, py1);
-            ctx.strokeStyle = `rgba(0,245,255,${alpha})`;
-            ctx.lineWidth = 0.8;
-            ctx.stroke();
-          }
         }
       }
 
@@ -375,7 +382,7 @@
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
     items.forEach(el => observer.observe(el));
   }
 
@@ -386,15 +393,14 @@
         if (entry.isIntersecting) {
           const el = entry.target;
           const target = parseInt(el.dataset.target);
-          let start = 0;
-          const dur = 1600;
+          const dur = 2000;
           const startTime = performance.now();
           function tick(now) {
             const progress = clamp((now - startTime) / dur, 0, 1);
-            const ease = 1 - Math.pow(1 - progress, 3);
+            const ease = 1 - Math.pow(1 - progress, 4);
             el.textContent = Math.floor(ease * target);
             if (progress < 1) requestAnimationFrame(tick);
-            else el.textContent = target + '+';
+            else el.textContent = target.toLocaleString() + '+';
           }
           requestAnimationFrame(tick);
           observer.unobserve(el);
@@ -406,7 +412,7 @@
 
   function initNav() {
     const nav = $('#nav');
-    const sections = ['home', 'work', 'about', 'contact'];
+    const sections = ['home', 'collections', 'about', 'contact'];
     const navLinks = $$('.nav-link');
 
     window.addEventListener('scroll', () => {
@@ -426,7 +432,7 @@
     const heroCta = $('#hero-cta-btn');
     if (heroCta) {
       heroCta.addEventListener('click', () => {
-        $('#work').scrollIntoView({ behavior: 'smooth' });
+        $('#collections').scrollIntoView({ behavior: 'smooth' });
       });
     }
 
@@ -446,7 +452,7 @@
           });
         }
       });
-    }, { threshold: 0.4 });
+    }, { threshold: 0.3 });
     sectionEls.forEach(el => io.observe(el));
   }
 
@@ -459,11 +465,12 @@
         filters.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         const filter = btn.dataset.filter;
-        cards.forEach(card => {
+        cards.forEach((card, index) => {
           const show = filter === 'all' || card.dataset.filter === filter;
-          card.style.transition = 'opacity 0.4s, transform 0.4s';
-          card.style.opacity = show ? '1' : '0.1';
-          card.style.transform = show ? 'scale(1)' : 'scale(0.97)';
+          card.style.transition = `opacity 0.5s ${index * 0.05}s, transform 0.5s ${index * 0.05}s var(--ease)`;
+          card.style.opacity = show ? '1' : '0.08';
+          card.style.transform = show ? 'scale(1)' : 'scale(0.96)';
+          card.style.pointerEvents = show ? 'all' : 'none';
         });
       });
     });
@@ -475,8 +482,8 @@
         const rect = el.getBoundingClientRect();
         const cx = rect.left + rect.width / 2;
         const cy = rect.top + rect.height / 2;
-        const dx = (e.clientX - cx) * 0.35;
-        const dy = (e.clientY - cy) * 0.35;
+        const dx = (e.clientX - cx) * 0.3;
+        const dy = (e.clientY - cy) * 0.3;
         el.style.transform = `translate(${dx}px, ${dy}px)`;
       });
       el.addEventListener('mouseleave', () => {
@@ -490,15 +497,15 @@
     if (!headline) return;
 
     setInterval(() => {
-      if (Math.random() > 0.85) {
-        headline.style.filter = 'blur(1px)';
-        headline.style.transform = `skewX(${(Math.random() - 0.5) * 2}deg)`;
+      if (Math.random() > 0.88) {
+        headline.style.filter = 'blur(0.5px)';
+        headline.style.transform = `skewX(${(Math.random() - 0.5) * 1.5}deg)`;
         setTimeout(() => {
           headline.style.filter = '';
           headline.style.transform = '';
-        }, 80);
+        }, 60);
       }
-    }, 3000);
+    }, 4000);
   }
 
   function revealHero() {
@@ -511,7 +518,7 @@
     $('#audio-ui') && ($('#audio-ui').classList.add('visible'));
   }
 
-  function initCardGlows() {
+  function initCardEffects() {
     $$('.work-card').forEach(card => {
       card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
@@ -519,7 +526,114 @@
         const y = ((e.clientY - rect.top) / rect.height) * 100;
         card.style.setProperty('--mx', x + '%');
         card.style.setProperty('--my', y + '%');
+
+        const centerX = (e.clientX - rect.left) / rect.width - 0.5;
+        const centerY = (e.clientY - rect.top) / rect.height - 0.5;
+        const rotateX = centerY * -6;
+        const rotateY = centerX * 6;
+        card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.01)`;
       });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+
+    $$('.featured-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const centerX = (e.clientX - rect.left) / rect.width - 0.5;
+        const centerY = (e.clientY - rect.top) / rect.height - 0.5;
+        const rotateX = centerY * -4;
+        const rotateY = centerX * 4;
+        card.style.transform = `perspective(1400px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+  }
+
+  function initCart() {
+    const cartCountEl = $('.cart-count');
+    const addButtons = $$('.btn-add-cart');
+
+    addButtons.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        cartCount++;
+        if (cartCountEl) cartCountEl.textContent = cartCount;
+
+        btn.textContent = '✓ ADDED';
+        btn.style.color = 'var(--gold)';
+        btn.style.borderColor = 'var(--gold)';
+        btn.style.background = 'rgba(212,168,83,0.08)';
+
+        setTimeout(() => {
+          btn.textContent = btn.dataset.product === 'Bespoke Heritage Set' ? 'INQUIRE NOW' : 'ADD TO BAG';
+          btn.style.color = '';
+          btn.style.borderColor = '';
+          btn.style.background = '';
+        }, 1500);
+
+        const ripple = document.createElement('div');
+        ripple.style.cssText = `
+          position: fixed;
+          top: ${e.clientY}px;
+          left: ${e.clientX}px;
+          width: 6px;
+          height: 6px;
+          background: var(--gold);
+          border-radius: 50%;
+          pointer-events: none;
+          z-index: 10001;
+          transform: translate(-50%, -50%) scale(1);
+          transition: transform 0.6s var(--ease-out), opacity 0.6s;
+        `;
+        document.body.appendChild(ripple);
+        requestAnimationFrame(() => {
+          ripple.style.transform = 'translate(-50%, -50%) scale(30)';
+          ripple.style.opacity = '0';
+        });
+        setTimeout(() => ripple.remove(), 700);
+      });
+    });
+  }
+
+  function initParallax() {
+    const sections = $$('.section-header, .about-left, .featured-grid');
+    
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+        if (isVisible) {
+          const offset = (rect.top / window.innerHeight) * 30;
+          section.style.transform = `translateY(${offset * 0.3}px)`;
+        }
+      });
+    }, { passive: true });
+  }
+
+  function initSmoothImages() {
+    const images = $$('.card-media img, .featured-card img');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'scale(1)';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    images.forEach(img => {
+      img.style.opacity = '0';
+      img.style.transform = 'scale(1.05)';
+      img.style.transition = 'opacity 1s var(--ease-out), transform 1.2s var(--ease-out)';
+      observer.observe(img);
     });
   }
 
@@ -538,7 +652,10 @@
     initWorkFilter();
     initMagnetic();
     initGlitch();
-    initCardGlows();
+    initCardEffects();
+    initCart();
+    initParallax();
+    initSmoothImages();
 
     setTimeout(revealHero, 300);
   }

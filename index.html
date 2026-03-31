@@ -3,11 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ANANYAJEWELS — Creative Digital Experiences</title>
-  <meta name="description" content="ANANYAJEWELS crafts immersive creative digital experiences that blend story, art, and technology into something extraordinary." />
+  <title>AnanyaJewels — Timeless Elegance, Exquisite Craftsmanship</title>
+  <meta name="description" content="AnanyaJewels offers exquisite, handcrafted jewelry pieces that blend timeless elegance with contemporary design. Discover our curated collections of rings, necklaces, bracelets, and more." />
+  <meta property="og:title" content="AnanyaJewels — Luxury Jewelry" />
+  <meta property="og:description" content="Discover exquisite handcrafted jewelry. Timeless elegance meets contemporary design." />
+  <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -19,7 +22,7 @@
 
   <div id="preloader">
     <div class="preloader-inner">
-      <div class="preloader-logo">ANANYAJEWELS</div>
+      <div class="preloader-logo">AnanyaJewels</div>
       <div class="preloader-bar-wrap">
         <div class="preloader-bar" id="preloader-bar"></div>
       </div>
@@ -28,163 +31,234 @@
   </div>
 
   <nav id="nav">
-    <div class="nav-logo" data-section="home">ANANYAJEWELS</div>
+    <div class="nav-logo" data-section="home">AnanyaJewels</div>
     <div class="nav-links">
-      <button class="nav-link" data-target="work" id="nav-work">WORK</button>
-      <button class="nav-link" data-target="about" id="nav-about">STUDIO</button>
-      <button class="nav-link" data-target="contact" id="nav-contact">CONTACT</button>
+      <button class="nav-link" data-target="collections" id="nav-collections">COLLECTIONS</button>
+      <button class="nav-link" data-target="about" id="nav-about">OUR STORY</button>
+      <button class="nav-link" data-target="contact" id="nav-contact">BOUTIQUE</button>
+      <button class="nav-cart magnetic" id="nav-cart">BAG <span class="cart-count">0</span></button>
     </div>
   </nav>
 
   <div id="audio-ui">
     <div class="audio-dot" id="audio-dot"></div>
-    <span class="audio-label">NOW PLAYING — ANANYAJEWELS SOUNDSCAPE VOL. 01</span>
+    <span class="audio-label">ANANYAJEWELS — THE ART OF ADORNMENT</span>
   </div>
 
   <section id="home" class="section hero-section">
     <canvas id="hero-canvas"></canvas>
     <div class="hero-content">
-      <div class="hero-tag reveal-item">CREATIVE DIGITAL EXPERIENCES</div>
+      <div class="hero-tag reveal-item">HANDCRAFTED LUXURY SINCE 2018</div>
       <h1 class="hero-headline reveal-item">
-        <span class="line">WE BUILD</span>
-        <span class="line gradient-text">WORLDS</span>
-        <span class="line">ONLINE.</span>
+        <span class="line">Timeless</span>
+        <span class="line gradient-text">Elegance</span>
+        <span class="line">Redefined.</span>
       </h1>
-      <p class="hero-sub reveal-item">Blending story, art, and technology<br>into something the world hasn't seen yet.</p>
+      <p class="hero-sub reveal-item">Exquisite jewelry pieces crafted with passion,<br>where every detail tells a story of beauty.</p>
       <div class="hero-cta reveal-item">
-        <button class="btn-primary magnetic" id="hero-cta-btn" data-target="work">VIEW OUR WORK ↓</button>
+        <button class="btn-primary magnetic" id="hero-cta-btn" data-target="collections">EXPLORE COLLECTIONS ↓</button>
       </div>
     </div>
     <div class="hero-scroll-hint">
       <span>SCROLL</span>
       <div class="scroll-line"></div>
     </div>
-    <div class="hero-year">FOUNDED 2018</div>
+    <div class="hero-year">ESTD. 2018</div>
   </section>
 
   <div class="marquee-strip">
     <div class="marquee-track">
-      <span>AWARD-WINNING WORK</span>
-      <span>·</span>
-      <span>IMMERSIVE EXPERIENCES</span>
-      <span>·</span>
-      <span>WEBGL & THREE.JS</span>
-      <span>·</span>
-      <span>BRAND ACTIVATIONS</span>
-      <span>·</span>
-      <span>INTERACTIVE INSTALLATIONS</span>
-      <span>·</span>
-      <span>XR / VR / AI</span>
-      <span>·</span>
-      <span>AWARD-WINNING WORK</span>
-      <span>·</span>
-      <span>IMMERSIVE EXPERIENCES</span>
-      <span>·</span>
-      <span>WEBGL & THREE.JS</span>
-      <span>·</span>
-      <span>BRAND ACTIVATIONS</span>
-      <span>·</span>
-      <span>INTERACTIVE INSTALLATIONS</span>
-      <span>·</span>
-      <span>XR / VR / AI</span>
-      <span>·</span>
+      <span>DIAMONDS</span>
+      <span>✦</span>
+      <span>18K GOLD</span>
+      <span>✦</span>
+      <span>NECKLACES</span>
+      <span>✦</span>
+      <span>ENGAGEMENT RINGS</span>
+      <span>✦</span>
+      <span>BRACELETS</span>
+      <span>✦</span>
+      <span>EARRINGS</span>
+      <span>✦</span>
+      <span>CUSTOM DESIGNS</span>
+      <span>✦</span>
+      <span>ETHICALLY SOURCED</span>
+      <span>✦</span>
+      <span>DIAMONDS</span>
+      <span>✦</span>
+      <span>18K GOLD</span>
+      <span>✦</span>
+      <span>NECKLACES</span>
+      <span>✦</span>
+      <span>ENGAGEMENT RINGS</span>
+      <span>✦</span>
+      <span>BRACELETS</span>
+      <span>✦</span>
+      <span>EARRINGS</span>
+      <span>✦</span>
+      <span>CUSTOM DESIGNS</span>
+      <span>✦</span>
+      <span>ETHICALLY SOURCED</span>
+      <span>✦</span>
     </div>
   </div>
 
-  <section id="work" class="section work-section">
+  <section class="section featured-section">
+    <div class="section-header" style="padding: 8rem 0 4rem;">
+      <div class="section-tag reveal-item">FEATURED</div>
+      <h2 class="section-title reveal-item">Signature<br><em>Pieces.</em></h2>
+    </div>
+    <div class="featured-grid">
+      <div class="featured-card reveal-item magnetic">
+        <div class="card-media">
+          <img src="necklace.png" alt="Heritage Gold Necklace" loading="lazy" />
+          <div class="card-overlay"></div>
+        </div>
+        <div class="card-content">
+          <h3 class="card-title">Heritage Gold Necklace</h3>
+          <p class="card-client">22K Gold · Kundan Setting</p>
+          <div class="card-price">₹1,85,000</div>
+        </div>
+      </div>
+      <div class="featured-card reveal-item magnetic">
+        <div class="card-media">
+          <img src="ring.png" alt="Celestial Diamond Ring" loading="lazy" />
+          <div class="card-overlay"></div>
+        </div>
+        <div class="card-content">
+          <h3 class="card-title">Celestial Diamond Ring</h3>
+          <p class="card-client">18K White Gold · 1.5ct Diamond</p>
+          <div class="card-price">₹2,45,000</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="collections" class="section collections-section">
     <div class="section-header">
-      <div class="section-tag reveal-item">SELECTED WORK</div>
-      <h2 class="section-title reveal-item">Award-Winning<br><em>Work.</em></h2>
+      <div class="section-tag reveal-item">OUR COLLECTIONS</div>
+      <h2 class="section-title reveal-item">Curated<br><em>Collections.</em></h2>
       <div class="work-filter reveal-item">
         <button class="filter-btn active" data-filter="all">ALL</button>
-        <button class="filter-btn" data-filter="web">WEBSITES</button>
-        <button class="filter-btn" data-filter="xr">XR / VR / AI</button>
-        <button class="filter-btn" data-filter="game">GAMES</button>
+        <button class="filter-btn" data-filter="rings">RINGS</button>
+        <button class="filter-btn" data-filter="necklaces">NECKLACES</button>
+        <button class="filter-btn" data-filter="bracelets">BRACELETS</button>
+        <button class="filter-btn" data-filter="earrings">EARRINGS</button>
       </div>
     </div>
 
     <div class="work-grid" id="work-grid">
 
-      <article class="work-card reveal-item" data-filter="web">
+      <article class="work-card reveal-item" data-filter="rings">
         <div class="card-media">
-          <div class="card-bg" style="--hue:190"></div>
+          <img src="ring.png" alt="Solitaire Diamond Ring" loading="lazy" />
+          <div class="card-overlay"></div>
           <div class="card-glow"></div>
           <div class="card-number">01</div>
         </div>
         <div class="card-info">
-          <h3 class="card-title">Harmonic State</h3>
-          <p class="card-client">— Google Arts & Culture</p>
-          <div class="card-tags"><span>WebGL</span><span>Music</span><span>Interactive</span></div>
+          <h3 class="card-title">Solitaire Diamond Ring</h3>
+          <p class="card-client">18K Gold · VVS1 Diamond</p>
+          <div class="card-price">₹1,25,000</div>
+          <div class="card-tags"><span>Rings</span><span>Diamond</span><span>18K Gold</span></div>
+        </div>
+        <div class="card-action">
+          <button class="btn-add-cart magnetic" data-product="Solitaire Diamond Ring" data-price="125000">ADD TO BAG</button>
         </div>
         <div class="card-arrow">→</div>
       </article>
 
-      <article class="work-card reveal-item" data-filter="xr">
+      <article class="work-card reveal-item" data-filter="necklaces">
         <div class="card-media">
-          <div class="card-bg" style="--hue:270"></div>
+          <img src="necklace.png" alt="Maharani Pearl Necklace" loading="lazy" />
+          <div class="card-overlay"></div>
           <div class="card-glow"></div>
           <div class="card-number">02</div>
         </div>
         <div class="card-info">
-          <h3 class="card-title">E.C.H.O.</h3>
-          <p class="card-client">— Warner Bros</p>
-          <div class="card-tags"><span>VR</span><span>AI</span><span>Film</span></div>
+          <h3 class="card-title">Maharani Pearl Necklace</h3>
+          <p class="card-client">22K Gold · South Sea Pearls</p>
+          <div class="card-price">₹2,10,000</div>
+          <div class="card-tags"><span>Necklace</span><span>Pearl</span><span>22K Gold</span></div>
+        </div>
+        <div class="card-action">
+          <button class="btn-add-cart magnetic" data-product="Maharani Pearl Necklace" data-price="210000">ADD TO BAG</button>
         </div>
         <div class="card-arrow">→</div>
       </article>
 
-      <article class="work-card reveal-item" data-filter="web">
+      <article class="work-card reveal-item" data-filter="bracelets">
         <div class="card-media">
-          <div class="card-bg" style="--hue:160"></div>
+          <img src="bracelet.png" alt="Ethereal Chain Bracelet" loading="lazy" />
+          <div class="card-overlay"></div>
           <div class="card-glow"></div>
           <div class="card-number">03</div>
         </div>
         <div class="card-info">
-          <h3 class="card-title">Paper Planes</h3>
-          <p class="card-client">— Chrome Experiments</p>
-          <div class="card-tags"><span>WebGL</span><span>Multiplayer</span></div>
+          <h3 class="card-title">Ethereal Chain Bracelet</h3>
+          <p class="card-client">18K Rose Gold · Diamonds</p>
+          <div class="card-price">₹85,000</div>
+          <div class="card-tags"><span>Bracelet</span><span>Rose Gold</span><span>Diamond</span></div>
+        </div>
+        <div class="card-action">
+          <button class="btn-add-cart magnetic" data-product="Ethereal Chain Bracelet" data-price="85000">ADD TO BAG</button>
         </div>
         <div class="card-arrow">→</div>
       </article>
 
-      <article class="work-card reveal-item" data-filter="game">
+      <article class="work-card reveal-item" data-filter="earrings">
         <div class="card-media">
-          <div class="card-bg" style="--hue:30"></div>
+          <img src="earring.png" alt="Chandelier Drop Earrings" loading="lazy" />
+          <div class="card-overlay"></div>
           <div class="card-glow"></div>
           <div class="card-number">04</div>
         </div>
         <div class="card-info">
-          <h3 class="card-title">Racer</h3>
-          <p class="card-client">— Chrome Experiments</p>
-          <div class="card-tags"><span>Game</span><span>Real-time</span></div>
+          <h3 class="card-title">Chandelier Drop Earrings</h3>
+          <p class="card-client">22K Gold · Uncut Diamonds</p>
+          <div class="card-price">₹1,45,000</div>
+          <div class="card-tags"><span>Earrings</span><span>Polki</span><span>22K Gold</span></div>
+        </div>
+        <div class="card-action">
+          <button class="btn-add-cart magnetic" data-product="Chandelier Drop Earrings" data-price="145000">ADD TO BAG</button>
         </div>
         <div class="card-arrow">→</div>
       </article>
 
-      <article class="work-card reveal-item" data-filter="xr">
+      <article class="work-card reveal-item" data-filter="necklaces">
         <div class="card-media">
-          <div class="card-bg" style="--hue:320"></div>
+          <img src="pendant.png" alt="Lotus Pendant Necklace" loading="lazy" />
+          <div class="card-overlay"></div>
           <div class="card-glow"></div>
           <div class="card-number">05</div>
         </div>
         <div class="card-info">
-          <h3 class="card-title">Patron Discover</h3>
-          <p class="card-client">— Warner Bros / Pottermore</p>
-          <div class="card-tags"><span>WebAR</span><span>Interactive</span></div>
+          <h3 class="card-title">Lotus Pendant Necklace</h3>
+          <p class="card-client">18K Gold · Ruby · Emerald</p>
+          <div class="card-price">₹1,65,000</div>
+          <div class="card-tags"><span>Pendant</span><span>Gemstone</span><span>18K Gold</span></div>
+        </div>
+        <div class="card-action">
+          <button class="btn-add-cart magnetic" data-product="Lotus Pendant Necklace" data-price="165000">ADD TO BAG</button>
         </div>
         <div class="card-arrow">→</div>
       </article>
 
-      <article class="work-card reveal-item" data-filter="web">
+      <article class="work-card reveal-item" data-filter="rings">
         <div class="card-media">
-          <div class="card-bg" style="--hue:210"></div>
+          <img src="custom.png" alt="Bespoke Heritage Set" loading="lazy" />
+          <div class="card-overlay"></div>
           <div class="card-glow"></div>
           <div class="card-number">06</div>
         </div>
         <div class="card-info">
-          <h3 class="card-title">Sustainable Horizons</h3>
-          <p class="card-client">— NASA / JPL</p>
-          <div class="card-tags"><span>Data Viz</span><span>3D</span></div>
+          <h3 class="card-title">Bespoke Heritage Set</h3>
+          <p class="card-client">Custom Design · 22K Gold</p>
+          <div class="card-price">From ₹3,00,000</div>
+          <div class="card-tags"><span>Custom</span><span>Bridal</span><span>22K Gold</span></div>
+        </div>
+        <div class="card-action">
+          <button class="btn-add-cart magnetic" data-product="Bespoke Heritage Set" data-price="300000">INQUIRE NOW</button>
         </div>
         <div class="card-arrow">→</div>
       </article>
@@ -195,20 +269,20 @@
   <section id="about" class="section about-section">
     <div class="about-grid">
       <div class="about-left">
-        <div class="section-tag reveal-item">THE STUDIO</div>
-        <h2 class="about-title reveal-item">We make the<br>internet feel<br><em>alive.</em></h2>
+        <div class="section-tag reveal-item">OUR LEGACY</div>
+        <h2 class="about-title reveal-item">Where tradition<br>meets modern<br><em>artistry.</em></h2>
         <div class="about-stats reveal-item">
           <div class="stat">
-            <div class="stat-num" data-target="12">0</div>
-            <div class="stat-label">Years of innovation</div>
+            <div class="stat-num" data-target="8">0</div>
+            <div class="stat-label">Years of heritage</div>
           </div>
           <div class="stat">
-            <div class="stat-num" data-target="200">0</div>
-            <div class="stat-label">Projects delivered</div>
+            <div class="stat-num" data-target="5000">0</div>
+            <div class="stat-label">Pieces crafted</div>
           </div>
           <div class="stat">
-            <div class="stat-num" data-target="80">0</div>
-            <div class="stat-label">Awards won</div>
+            <div class="stat-num" data-target="2500">0</div>
+            <div class="stat-label">Happy clients</div>
           </div>
         </div>
       </div>
@@ -217,16 +291,16 @@
           <canvas id="about-canvas"></canvas>
         </div>
         <div class="about-manifesto reveal-item">
-          <p>ANANYAJEWELS is a creative studio obsessed with pushing the boundaries of what the web can do. We believe that technology is a medium for storytelling — and that every pixel, every interaction is a chance to evoke something real.</p>
-          <p>We work with the world's most ambitious brands to build experiences that don't just communicate — they resonate.</p>
+          <p>AnanyaJewels is a luxury jewelry house dedicated to creating pieces that transcend time. Every creation begins with a vision — a meticulous design process where master artisans transform the finest metals and gemstones into wearable art.</p>
+          <p>We believe jewelry is more than adornment — it's an heirloom, a celebration, an expression of who you are. Our commitment to ethical sourcing and exceptional craftsmanship ensures every piece carries a story worth telling.</p>
         </div>
         <div class="about-clients reveal-item">
-          <span>GOOGLE</span>
-          <span>WARNER BROS</span>
-          <span>NIKE</span>
-          <span>NASA</span>
-          <span>SPOTIFY</span>
-          <span>MICROSOFT</span>
+          <span>22K GOLD</span>
+          <span>PLATINUM</span>
+          <span>VVS DIAMONDS</span>
+          <span>SOUTH SEA PEARLS</span>
+          <span>EMERALDS</span>
+          <span>RUBIES</span>
         </div>
       </div>
     </div>
@@ -234,27 +308,27 @@
 
   <section class="section capabilities-section">
     <div class="capabilities-inner">
-      <div class="section-tag reveal-item">WHAT WE DO</div>
+      <div class="section-tag reveal-item">OUR CRAFT</div>
       <div class="capabilities-list">
         <div class="capability reveal-item">
           <span class="cap-num">01</span>
-          <h3>WebGL & Three.js</h3>
-          <p>Real-time 3D environments and particle systems that run at 60fps in any browser, on any device.</p>
+          <h3>Handcrafted Excellence</h3>
+          <p>Every piece is meticulously crafted by master artisans with decades of experience, ensuring unparalleled quality and attention to detail.</p>
         </div>
         <div class="capability reveal-item">
           <span class="cap-num">02</span>
-          <h3>Immersive Installations</h3>
-          <p>Large-scale physical + digital hybrid experiences for events, museums, and brand activations.</p>
+          <h3>Ethically Sourced</h3>
+          <p>We partner with certified suppliers to ensure all gemstones and precious metals are responsibly and ethically sourced.</p>
         </div>
         <div class="capability reveal-item">
           <span class="cap-num">03</span>
-          <h3>XR / VR / AI</h3>
-          <p>Extended reality experiences and AI-driven interactions that blur the line between real and virtual.</p>
+          <h3>Custom Designs</h3>
+          <p>Bring your vision to life with our bespoke design service. From concept sketches to the final piece, we create jewelry as unique as you.</p>
         </div>
         <div class="capability reveal-item">
           <span class="cap-num">04</span>
-          <h3>Creative Direction</h3>
-          <p>Strategy, concept, and visual identity rooted in cultural resonance and cutting-edge aesthetics.</p>
+          <h3>Lifetime Warranty</h3>
+          <p>Every AnanyaJewels piece comes with a lifetime warranty covering craftsmanship defects, along with complimentary cleaning and maintenance.</p>
         </div>
       </div>
     </div>
@@ -262,23 +336,23 @@
 
   <section id="contact" class="section contact-section">
     <div class="contact-inner">
-      <div class="section-tag reveal-item">GET IN TOUCH</div>
-      <h2 class="contact-headline reveal-item">Let's build<br>something<br><span class="gradient-text">extraordinary.</span></h2>
+      <div class="section-tag reveal-item">VISIT US</div>
+      <h2 class="contact-headline reveal-item">Experience the<br>art of<br><span class="gradient-text">jewelry.</span></h2>
       <div class="contact-cta reveal-item">
-        <a href="mailto:hello@ananyajewels.studio" class="btn-primary magnetic" id="contact-btn">hello@ananyajewels.studio ↗</a>
+        <a href="mailto:hello@ananyajewels.com" class="btn-primary magnetic" id="contact-btn">BOOK AN APPOINTMENT ↗</a>
       </div>
       <div class="contact-offices reveal-item">
         <div class="office">
-          <div class="office-city">LOS ANGELES</div>
-          <div class="office-addr">Venice Beach, CA</div>
+          <div class="office-city">MUMBAI</div>
+          <div class="office-addr">Bandra West, Maharashtra</div>
         </div>
         <div class="office">
-          <div class="office-city">AMSTERDAM</div>
-          <div class="office-addr">Jordaan District, NL</div>
+          <div class="office-city">DELHI</div>
+          <div class="office-addr">Defence Colony, New Delhi</div>
         </div>
         <div class="office">
-          <div class="office-city">TOKYO</div>
-          <div class="office-addr">Shibuya-ku, JP</div>
+          <div class="office-city">BANGALORE</div>
+          <div class="office-addr">Indiranagar, Karnataka</div>
         </div>
       </div>
     </div>
@@ -286,14 +360,14 @@
 
   <footer class="site-footer">
     <div class="footer-inner">
-      <div class="footer-logo">ANANYAJEWELS</div>
+      <div class="footer-logo">AnanyaJewels</div>
       <div class="footer-links">
-        <a href="#" class="footer-link magnetic">TWITTER</a>
         <a href="#" class="footer-link magnetic">INSTAGRAM</a>
-        <a href="#" class="footer-link magnetic">LINKEDIN</a>
-        <a href="#" class="footer-link magnetic">GITHUB</a>
+        <a href="#" class="footer-link magnetic">PINTEREST</a>
+        <a href="#" class="footer-link magnetic">FACEBOOK</a>
+        <a href="#" class="footer-link magnetic">WHATSAPP</a>
       </div>
-      <div class="footer-copy">© 2026 ANANYAJEWELS STUDIO. ALL RIGHTS RESERVED.</div>
+      <div class="footer-copy">© 2026 ANANYAJEWELS. ALL RIGHTS RESERVED.</div>
     </div>
   </footer>
 
