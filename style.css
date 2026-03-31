@@ -101,7 +101,7 @@ body.cursor-hover #cursor-dot {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  transition: opacity 1s var(--ease), visibility 1s;
+  transition: opacity 0.8s var(--ease), visibility 0.8s;
 }
 
 #preloader.hidden {
@@ -115,13 +115,27 @@ body.cursor-hover #cursor-dot {
 }
 
 .preloader-logo {
-  font-family: var(--font-display);
-  font-size: clamp(1.8rem, 5vw, 3.2rem);
-  letter-spacing: 0.3em;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  letter-spacing: 0.35em;
   color: var(--silver);
   margin-bottom: 3rem;
   font-weight: 400;
   font-style: italic;
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 1.2s var(--ease-out), transform 1.2s var(--ease-out);
+}
+
+.preloader-logo.fade-in {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.preloader-logo.fade-out {
+  opacity: 0;
+  transform: scale(1.05);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
 }
 
 .preloader-bar-wrap {
@@ -166,7 +180,7 @@ body.cursor-hover #cursor-dot {
 }
 
 .nav-logo {
-  font-family: var(--font-display);
+  font-family: 'Times New Roman', Times, serif;
   font-size: 1.2rem;
   letter-spacing: 0.25em;
   color: var(--silver);
@@ -1039,7 +1053,7 @@ body.cursor-hover #cursor-dot {
 }
 
 .footer-logo {
-  font-family: var(--font-display);
+  font-family: 'Times New Roman', Times, serif;
   font-size: 0.85rem;
   letter-spacing: 0.3em;
   color: rgba(192,192,192,0.25);

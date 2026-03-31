@@ -79,8 +79,13 @@
       const preloader = $('#preloader');
       const bar = $('#preloader-bar');
       const num = $('#preloader-num');
+      const logo = $('.preloader-logo');
       const duration = 2400;
       const start = performance.now();
+
+      setTimeout(() => {
+        logo.classList.add('fade-in');
+      }, 100);
 
       function update(now) {
         const elapsed = now - start;
@@ -95,10 +100,16 @@
         } else {
           num.textContent = '100';
           bar.style.width = '100%';
+
+          setTimeout(() => {
+            logo.classList.remove('fade-in');
+            logo.classList.add('fade-out');
+          }, 400);
+
           setTimeout(() => {
             preloader.classList.add('hidden');
             resolve();
-          }, 500);
+          }, 1400);
         }
       }
 
